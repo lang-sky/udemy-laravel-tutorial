@@ -53,6 +53,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * store names as lowercase into database
+     */
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = Str::lower($name);
+    }
+
+    /**
+     * get names as upper capital letters when get
+     */
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = Str::lower($email);
+    }
+
     public function isVerified()
     {
         return $this->verified = User::VERIFIED_USER;
