@@ -14,72 +14,19 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $sellers = Seller::has('products')->get();
+        return response()->json(['data' => $sellers], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Seller  $seller
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Seller $seller)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Seller $seller)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Seller $seller)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Seller $seller)
-    {
-        //
+        $seller = Seller::has('products')->findOrFail($id);
+        return response()->json(['data' => $seller], 200);
     }
 }
